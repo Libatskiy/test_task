@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 8000:80
+    volumes:
+      - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
+      - ./nginx/host.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - fpm
+
+  fpm:
+      build: ./fpm
+      volumes:
+        - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
+      links:
+        - db
+      environment:
+        XDEBUG_CONFIG: "remote_host=${REMOTE_HOST}"
+        PHP_IDE_CONFIG: "serverName=docker"
+      working_dir: ${APP_PATH_CONTAINER}
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ${DB_PATH_HOST}:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 6080:8080
+
+  composer:
+    image: composer
+    volumes:
+      - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
+    working_dir: ${APP_PATH_CONTAINER}
+    command: composer install
+    links:
+      - fpm
+      - nginx
+
+
+
+
