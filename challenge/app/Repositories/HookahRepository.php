@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Hookah;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
@@ -24,8 +25,8 @@ class HookahRepository implements HookahRepositoryInterface
     public function findFree($bar,  $timeFrom,  $timeTo,  $people): Collection
     {
         $needPipe = Str::pipes($people);
-        $timeNeedFrom = $timeFrom - 60 * 30;
-        $timeNeedTo = $timeFrom + 60 * 30;
+        $timeNeedFrom = Carbon::parse($timeFrom)->subMinutes(30)->toDateTimeString();
+        $timeNeedTo = Carbon::parse($timeTo)->addMinutes(30)->toDateTimeString();
 
         return Hookah::wherePipe($needPipe)
             ->whereNotIn('id', function ($query) use ($timeNeedFrom,$timeNeedTo) {

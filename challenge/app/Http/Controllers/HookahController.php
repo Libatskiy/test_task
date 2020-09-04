@@ -112,7 +112,7 @@ class HookahController extends Controller
      *             @SWG\Items(ref="#/definitions/Hookah")
      *         ),
      *       ),
-     *      @SWG\Response(response=402, description="Error validation"),
+     *      @SWG\Response(response=422, description="Error validation"),
      *      @SWG\Response(response=404, description="Error create"),
      * )
      */
@@ -128,7 +128,7 @@ class HookahController extends Controller
 
     /**
      * @SWG\Get(
-     *      path="/hookahs//find/bar={bar}/from={timeFrom}/to={timeTo}/people={people}",
+     *      path="/hookahs/find/bar={bar}/from={timeFrom}/to={timeTo}/people={people}",
      *      tags={"Hookahs"},
      *      summary="Get list of free hookahs in bar",
      *      description="Returns list of free hookahs in bar",
@@ -140,17 +140,17 @@ class HookahController extends Controller
      *          in="path",
      *      ),
      *     @SWG\Parameter(
-     *          name="time_from",
+     *          name="timeFrom",
      *          description="time from need hookah",
      *          required=true,
-     *          type="integer",
+     *          type="string",
      *          in="path",
      *      ),
      *     @SWG\Parameter(
-     *          name="time_to",
+     *          name="timeTo",
      *          description="time to need hookah",
      *          required=true,
-     *          type="integer",
+     *          type="string",
      *          in="path",
      *      ),
      *     @SWG\Parameter(
@@ -171,7 +171,7 @@ class HookahController extends Controller
      *       @SWG\Response(response=404, description="Bad request"),
      *)
      */
-    public function find(int $bar, $timeFrom, $timeTo, int $people): JsonResponse
+    public function find(int $bar, string $timeFrom, string $timeTo, int $people): JsonResponse
     {
         $result = $this->hookahRepository->findFree($bar, $timeFrom, $timeTo, $people);
         return response()->json($result, 200);

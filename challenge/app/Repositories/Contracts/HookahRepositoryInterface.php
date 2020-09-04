@@ -11,5 +11,5 @@ interface HookahRepositoryInterface
 
     public function findById(int $id): ?Hookah;
 
-    public function findFree(int $bar,int $timeFrom, int $timeTo, int $people): Collection;
+    public function findFree(int $bar,string $timeFrom, string $timeTo, int $people): Collection;
 }

@@ -34,14 +34,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *  ),
  *  @SWG\Property(
  *      property="time_from",
- *      type="integer",
- *     example = "123456789",
+ *      type="dateTime",
+ *     example = "2020-09-07 14:35:42 ",
  *     description = "Time from reservation",
  *  ),
  *  @SWG\Property(
  *      property="time_to",
  *      type="dateTime",
- *     example = "123456889",
+ *     example = "2021-09-07 15:05:42",
  *     description = "Time to reservation",
  *  )
  * )

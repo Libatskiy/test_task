@@ -15,7 +15,7 @@ class ReservationRequest extends ApiRequest
             'name' => 'required|max:255|unique_active',
             'number_people' => 'required|integer|max:10',
             'hookah_id' => 'required|exists:hookahs,id|is_hookah_free:time_from|is_hookah_pipe_match',
-            'time_from' => 'required|integer',
+            'time_from' => 'required|date',
         ];
     }
 

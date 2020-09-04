@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 
 use App\Models\Hookah;
+use Carbon\Carbon;
 use Tests\TestCase;
 
 class ReservationTest extends TestCase
@@ -34,7 +35,7 @@ class ReservationTest extends TestCase
             "name"=> "Duncan",
             "number_people" => $hookah->pipe * 2,
             "hookah_id" => 1,
-            "time_from" => 1000];
+            "time_from" => Carbon::now()->toDateTime()];
 
 
         $response = $this->post('api/v1/booking', $data);

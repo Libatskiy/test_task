@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 
+use Carbon\Carbon;
 use Tests\TestCase;
 
 class HookahsTest extends TestCase
@@ -49,7 +50,10 @@ class HookahsTest extends TestCase
 
     public function testFindHookahs()
     {
-        $response = $this->get('api/v1/hookahs/find/bar=1/from=1000/to=11800/people=7');
+        $carbon = Carbon::parse('2021-09-10 17:00:00');
+        $response = $this->get('api/v1/hookahs/find/bar=1/from=' .
+            $carbon->toDateTimeString() . '/to=' .
+            $carbon->addHour(2)->toDateTimeString() . '/people=2');
         $response->assertStatus(200);
     }
 

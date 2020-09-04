@@ -105,8 +105,8 @@ class ReservationController extends Controller
      *          name="time_from",
      *          description="time from reservation hookah",
      *          required=true,
-     *          type="integer",
-     *          in="path",
+     *          type="string",
+     *          in="query",
      *      ),
      *      @SWG\Response(
      *          response=201,
@@ -116,7 +116,7 @@ class ReservationController extends Controller
      *             @SWG\Items(ref="#/definitions/Reservation")
      *         ),
      *       ),
-     *      @SWG\Response(response=402, description="Error validation"),
+     *      @SWG\Response(response=422, description="Error validation"),
      *      @SWG\Response(response=404, description="Error create"),
      * )
      */

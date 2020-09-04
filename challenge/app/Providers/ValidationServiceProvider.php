@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Hookah;
 use App\Models\Reservation;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Validator;
@@ -19,9 +20,9 @@ class ValidationServiceProvider extends ServiceProvider
             $parameters,
             $validator
         ) {
-            $time = $validator->getData()[$parameters[0]];
-            $time_from = $time - 60 * 30;
-            $time_to = $time + 60 * 30;
+            $time = Carbon::parse($validator->getData()['time_from']);
+            $time_from = $time->subMinutes(30)->toDateTimeString();
+            $time_to = $time->addMinutes(30)->toDateTimeString();
             $reservation = Reservation::where('hookah_id', $value)
                 ->whereBetween('time_from', [$time_from,$time_to])
                 ->first();

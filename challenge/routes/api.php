@@ -24,7 +24,7 @@ Route::prefix('/hookahs')->group(function () {
     Route::post('/', 'HookahController@create');
     Route::delete('/{id}', 'HookahController@destroy')->where(['id'], '[0-9]+');
     Route::get('/find/bar={bar}/from={timeFrom}/to={timeTo}/people={people}', 'HookahController@find')
-        ->where(['bar', 'timeFrom', 'timeTo', 'people'], '[0-9]+');
+        ->where(['bar', 'people'], '[0-9]+');
 });
 
 Route::prefix('/hookah-in-bar')->group(function () {

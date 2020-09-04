@@ -38,7 +38,7 @@ class HookahRelationController extends Controller
      *         ),
      *       ),
      *
-     *      @SWG\Response(response=402, description="Error validation"),
+     *      @SWG\Response(response=422, description="Error validation"),
      *      @SWG\Response(response=404, description="Error create"),
      * )
      */
