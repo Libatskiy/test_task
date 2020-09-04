@@ -9,3 +9,6 @@ stop:
 
 in:
 	docker-compose exec fpm bash
+
+test:
+	docker-compose run fpm php vendor/bin/phpunit
