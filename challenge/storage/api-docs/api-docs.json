@@ -1,0 +1,516 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Hookah test API",
+        "description": "This is test API documentation",
+        "contact": {
+            "email": "admin@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "host": "127.0.0.1:8080",
+    "basePath": "/api/v1",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/bars": {
+            "get": {
+                "tags": [
+                    "Bars"
+                ],
+                "summary": "Get list of bars",
+                "description": "Returns list of bars",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/HookahBar"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bad request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Bars"
+                ],
+                "summary": "Create bar",
+                "description": "Create bar",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Bar name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful created",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/HookahBar"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/bars/{id}": {
+            "delete": {
+                "tags": [
+                    "Bars"
+                ],
+                "summary": "Delete bar by ID",
+                "description": "Delete barby ID",
+                "operationId": "getProjectById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Bar id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "successful deleted"
+                    },
+                    "404": {
+                        "description": "Bar Not Found"
+                    }
+                }
+            }
+        },
+        "/hookahs": {
+            "get": {
+                "tags": [
+                    "Hookahs"
+                ],
+                "summary": "Get list of hookahs",
+                "description": "Returns list of hookahs",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Hookah"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bad request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Hookahs"
+                ],
+                "summary": "Create hookah",
+                "description": "Create hookah",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Hookah name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pipe",
+                        "in": "query",
+                        "description": "Number pipe",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "price",
+                        "in": "query",
+                        "description": "Price of hookah",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful created",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Hookah"
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error validation"
+                    },
+                    "404": {
+                        "description": "Error create"
+                    }
+                }
+            }
+        },
+        "/hookahs/{id}": {
+            "delete": {
+                "tags": [
+                    "Hookahs"
+                ],
+                "summary": "Delete hookah by ID",
+                "description": "Delete hookah by ID",
+                "operationId": "getProjectById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Hookah id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "successful deleted"
+                    },
+                    "404": {
+                        "description": "Hookah Not Found"
+                    }
+                }
+            }
+        },
+        "/hookahs/find/bar={bar}/from={timeFrom}/to={timeTo}/people={people}": {
+            "get": {
+                "tags": [
+                    "Hookahs"
+                ],
+                "summary": "Get list of free hookahs in bar",
+                "description": "Returns list of free hookahs in bar",
+                "parameters": [
+                    {
+                        "name": "bar",
+                        "in": "path",
+                        "description": "Need bar ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "timeFrom",
+                        "in": "path",
+                        "description": "time from need hookah",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "timeTo",
+                        "in": "path",
+                        "description": "time to need hookah",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "people",
+                        "in": "path",
+                        "description": "number people who need hookah",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Hookah"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/hookah-in-bar": {
+            "post": {
+                "tags": [
+                    "HookahRelation"
+                ],
+                "summary": "Add hookah in bar",
+                "description": "Create hookah",
+                "parameters": [
+                    {
+                        "name": "hookah_id",
+                        "in": "query",
+                        "description": "Hookah ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "hookah_br_id",
+                        "in": "query",
+                        "description": "Hookah bar ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Hookah add to bar",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/HookahRelation"
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error validation"
+                    },
+                    "404": {
+                        "description": "Error create"
+                    }
+                }
+            }
+        },
+        "/hookah-in-bar/{id}": {
+            "delete": {
+                "tags": [
+                    "HookahRelation"
+                ],
+                "summary": "Delete hookah from bar by ID",
+                "description": "Delete hookah from bar by ID",
+                "operationId": "getProjectById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Hookah ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "successful deleted"
+                    },
+                    "404": {
+                        "description": "Bar Not Found"
+                    }
+                }
+            }
+        },
+        "/booking/active": {
+            "get": {
+                "tags": [
+                    "Reservation"
+                ],
+                "summary": "Get list of all active reservation",
+                "description": "Returns llist of all active reservation",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Reservation"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/booking/active/{id}": {
+            "get": {
+                "tags": [
+                    "Reservation"
+                ],
+                "summary": "Get list of all active reservation in bar",
+                "description": "Returns llist of all active reservation in bar",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Bar ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Reservation"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/booking": {
+            "post": {
+                "tags": [
+                    "Reservation"
+                ],
+                "summary": "Create reservation",
+                "description": "Create reservation",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Person name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "number_people",
+                        "in": "query",
+                        "description": "Number people",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "hookah_id",
+                        "in": "query",
+                        "description": "Hookah ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "time_from",
+                        "in": "query",
+                        "description": "time from reservation hookah",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful created",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Reservation"
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error validation"
+                    },
+                    "404": {
+                        "description": "Error create"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Hookah": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Turk hookah"
+                },
+                "pipe": {
+                    "type": "integer",
+                    "example": "4"
+                },
+                "price": {
+                    "type": "integer",
+                    "example": "20"
+                }
+            }
+        },
+        "HookahBar": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": "3"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Best Bar"
+                }
+            }
+        },
+        "HookahRelation": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "hookah_id": {
+                    "description": "Hookah ID",
+                    "type": "integer",
+                    "example": "10"
+                },
+                "hookah_bar_id": {
+                    "description": "Hookah bar ID",
+                    "type": "integer",
+                    "example": "1"
+                }
+            }
+        },
+        "Reservation": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "name person",
+                    "type": "integer",
+                    "uniqueItems": true,
+                    "example": "Vasiliy"
+                },
+                "number_people": {
+                    "description": "number people",
+                    "type": "integer",
+                    "example": "4"
+                },
+                "hookah_id": {
+                    "description": "Hookah ID",
+                    "type": "integer",
+                    "example": "10"
+                },
+                "time_from": {
+                    "description": "Time from reservation",
+                    "type": "dateTime",
+                    "example": "2020-09-07 14:35:42 "
+                },
+                "time_to": {
+                    "description": "Time to reservation",
+                    "type": "dateTime",
+                    "example": "2020-09-07 15:05:42"
+                }
+            }
+        }
+    },
+    "responses": {
+        "402": {
+            "description": "Error validation"
+        },
+        "404": {
+            "description": "Error create"
+        }
+    }
+}
